@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,20 +8,33 @@ public class Main {
         int opcion;
 
         do {
-            System.out.println("Bienvenido a la gestion de consultores Natura");
+            System.out.println("   Bienvenido Jefe Natura! :) ");
+            System.out.println("-----------------------------");
+            System.out.println("*Gestión de consultores Natura*");
             System.out.println("1. Agregar consultor");
             System.out.println("2. Buscar consultor");
             System.out.println("3. Eliminar consultor");
             System.out.println("4. Modificar consultor");
             System.out.println("5. Listar consultores");
-            System.out.println("----------------");
-            System.out.println("Gestion de productos Natura: ");
-            System.out.println("6. Ver productos");
-            System.out.println("7. Agregar producto");
-            System.out.println("8. Eliminar producto");
-            System.out.println("9. Salir");
+            System.out.println("-----------------------------");
+            System.out.println("*Gestión de productos Natura*");
+            System.out.println("6. Agregar producto");
+            System.out.println("7. Eliminar producto");
+            System.out.println("8. Ver productos");
+            System.out.println("-----------------------------");
+            System.out.println("*Gestión de ventas Natura*");
+            System.out.println("9. Registrar ventas");
+            System.out.println("10. Consultar ganancias");
+            System.out.println("11. Salir");
             System.out.print("Ingrese una opción: ");
-            opcion = scanner.nextInt();
+
+            try {
+                opcion = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, ingrese solo números.");
+                scanner.next();
+                opcion = 0;
+            }
 
             switch (opcion) {
                 case 1:
@@ -39,22 +53,27 @@ public class Main {
                     gestionConsultores.listarConsultores();
                     break;
                 case 6:
-                    Producto.verProductos();
-                    break;
-                case 7:
                     Producto.agregarProducto();
                     break;
-                case 8:
+                case 7:
                     Producto.eliminarProducto();
                     break;
+                case 8:
+                    Producto.verProductos();
+                    break;
                 case 9:
-                    System.out.println("\nSaliendo del programa...");
+                    Producto.registrarVenta();
+                    break;
+                case 10:
+                    Producto.consultarGanancias();
+                    break;
+                case 11:
+                    System.out.println("\nSaliendo del programa :))");
                     break;
                 default:
                     System.out.println("\nOpción no válida.");
             }
-        } while (opcion != 9);
-
+        } while (opcion != 11);
         scanner.close();
     }
 }

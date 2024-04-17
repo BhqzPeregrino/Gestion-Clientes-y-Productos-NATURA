@@ -1,27 +1,16 @@
 public class Consultor {
-    protected String codigo;
     protected int id;
     protected String nombre;
     protected String apellido;
     protected String telefono;
     protected String direccion;
 
-    public Consultor(String codigo, int id, String nombre, String apellido, String telefono, String direccion) {
-        this.codigo = codigo;
+    public Consultor(int id, String nombre, String apellido, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.direccion = direccion;
-    }
-
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public int getId() {

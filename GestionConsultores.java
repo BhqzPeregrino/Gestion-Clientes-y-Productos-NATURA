@@ -1,20 +1,80 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class GestionConsultores {
-    private ArrayList<Consultor> consultores;
+    protected ArrayList<Consultor> consultores;
 
     public GestionConsultores() {
         consultores = new ArrayList<>();
     }
 
-    private int generarIdConsultor() {
-        return consultores.size() + 1;
+    public void agregarConsultor() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el ID del consultor: ");
+        int id;
+    
+        while (true) {
+            try {
+                id = scanner.nextInt();
+                if (!consultorExistente(id)) {
+                    break;
+                } else {
+                    System.out.println("El ID ingresado ya está en uso. Por favor, ingrese otro ID.");
+                    System.out.print("Ingrese el ID del consultor: ");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, ingrese un ID válido (número entero).");
+                System.out.print("Ingrese el ID del consultor: ");
+                scanner.next();
+            }
+        }
+    
+        System.out.print("Ingrese el nombre del consultor: ");
+        String nombre = scanner.next();
+        System.out.print("Ingrese el apellido del consultor: ");
+        String apellido = scanner.next();
+    
+        System.out.print("Ingrese el teléfono del consultor: ");
+        String telefono;
+    
+        while (true) {
+            telefono = scanner.next();
+            if (!telefonoExistente(telefono)) {
+                break;
+            } else {
+                System.out.println("El teléfono ingresado ya está en uso. Por favor, ingrese otro teléfono.");
+                System.out.print("Ingrese el teléfono del consultor: ");
+            }
+        }
+    
+        System.out.print("Ingrese la dirección del consultor: ");
+        String direccion = scanner.next();
+    
+        Consultor consultorNuevo = new Consultor(id, nombre, apellido, telefono, direccion);
+        consultores.add(consultorNuevo);
+        System.out.println("\nConsultor agregado correctamente.");
     }
 
-    private String generarCodigoConsultor() {
-        return "C" + (consultores.size() + 1);
+    
+    private boolean consultorExistente(int id) {
+        for (Consultor consultor : consultores) {
+            if (consultor.getId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
+
+    private boolean telefonoExistente(String telefono) {
+        for (Consultor consultor : consultores) {
+            if (consultor.getTelefono().equals(telefono)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private Consultor buscarConsultor(int id) {
         for (Consultor consultor : consultores) {
@@ -23,22 +83,7 @@ public class GestionConsultores {
             }
         }
         return null;
-    }
-
-    public void agregarConsultor() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el nombre del consultor: ");
-        String nombre = scanner.next();
-        System.out.print("Ingrese el apellido del consultor: ");
-        String apellido = scanner.next();
-        System.out.print("Ingrese el telefono del consultor: ");
-        String telefono = scanner.next();
-        System.out.print("Ingrese la direccion del consultor: ");
-        String direccion = scanner.next();
-        Consultor consultorNuevo = new Consultor(generarCodigoConsultor(), generarIdConsultor(), nombre, apellido, telefono, direccion);
-        consultores.add(consultorNuevo);
-        System.out.println("\nConsultor agregado correctamente.");
-    }
+    } 
 
     public void buscarConsultor() {
         Scanner scanner = new Scanner(System.in);

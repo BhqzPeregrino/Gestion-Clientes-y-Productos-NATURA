@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Inventario {
-    private ArrayList<Producto> productos;
+    protected ArrayList<Producto> productos;
 
     public Inventario() {
         this.productos = new ArrayList<>();
